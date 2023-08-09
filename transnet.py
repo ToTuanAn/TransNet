@@ -28,7 +28,7 @@ class TransNet:
         with self.session.graph.as_default():
             print("[TransNet] Creating ops.")
 
-            with tf.variable_scope("TransNet"):
+            with tf.compat.v1.variable_scope("TransNet"):
                 def conv3d(inp, filters, dilation_rate):
                     return tf.keras.layers.Conv3D(filters, kernel_size=3, dilation_rate=(dilation_rate, 1, 1),
                                                   padding="SAME", activation=tf.nn.relu, use_bias=True,
@@ -40,12 +40,12 @@ class TransNet:
                 print(" " * 10, "Input ({})".format(shape_text(net)))
 
                 for idx_l in range(self.params.L):
-                    with tf.variable_scope("SDDCNN_{:d}".format(idx_l + 1)):
+                    with tf.compat.v1.variable_scope("SDDCNN_{:d}".format(idx_l + 1)):
                         filters = (2 ** idx_l) * self.params.F
                         print(" " * 10, "SDDCNN_{:d}".format(idx_l + 1))
 
                         for idx_s in range(self.params.S):
-                            with tf.variable_scope("DDCNN_{:d}".format(idx_s + 1)):
+                            with tf.compat.v1.variable_scope("DDCNN_{:d}".format(idx_s + 1)):
                                 net = tf.identity(net)  # improves look of the graph in TensorBoard
                                 conv1 = conv3d(net, filters, 1)
                                 conv2 = conv3d(net, filters, 2)
