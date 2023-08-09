@@ -34,7 +34,7 @@ class TransNet:
                                                   padding="SAME", activation=tf.nn.relu, use_bias=True,
                                                   name="Conv3D_{:d}".format(dilation_rate))(inp)
 
-                self.inputs = tf.placeholder(tf.uint8,
+                self.inputs = tf.compat.v1.placeholder(tf.uint8,
                                              shape=[None, None, self.params.INPUT_HEIGHT, self.params.INPUT_WIDTH, 3])
                 net = tf.cast(self.inputs, dtype=tf.float32) / 255.
                 print(" " * 10, "Input ({})".format(shape_text(net)))
