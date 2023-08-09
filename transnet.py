@@ -69,7 +69,7 @@ class TransNet:
                 print(" " * 10, "Predictions ({})".format(shape_text(self.predictions)))
 
             print("[TransNet] Network built.")
-            no_params = np.sum([int(np.prod(v.get_shape().as_list())) for v in tf.trainable_variables()])
+            no_params = np.sum([int(np.prod(v.get_shape().as_list())) for v in tf.compat.v1.trainable_variables()])
             print("[TransNet] Found {:d} trainable parameters.".format(no_params))
 
     def _restore(self):
