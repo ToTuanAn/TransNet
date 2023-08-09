@@ -74,7 +74,7 @@ class TransNet:
 
     def _restore(self):
         if self.params.CHECKPOINT_PATH is not None:
-            saver = tf.train.Saver()
+            saver = tf.compat.v1.train.Saver()
             saver.restore(self.session, self.params.CHECKPOINT_PATH)
             print("[TransNet] Parameters restored from '{}'.".format(os.path.basename(self.params.CHECKPOINT_PATH)))
 
