@@ -17,7 +17,7 @@ class TransNet:
 
     def __init__(self, params: TransNetParams, session=None):
         self.params = params
-        self.session = session or tf.Session()
+        self.session = session or tf.compat.v1.Session()
         self._build()
         self._restore()
 
